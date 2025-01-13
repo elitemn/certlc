@@ -234,7 +234,7 @@
 
         "workbookDisplayName": {
             "type": "string",
-            "defaultValue": "CERTLC Dashboard",
+            "defaultValue": "custcertlc Dashboard",
             "metadata": {
                 "description": "The friendly name for the workbook that is used in the Gallery or Saved List.  This name must be unique within a resource group."
             }
@@ -392,7 +392,7 @@
                         "caching": "ReadOnly",
                         "createOption": "FromImage",
                         "managedDisk": {
-                            "storageAccountType": "StandardHDD_LRS"
+                            "storageAccountType": "Standard_LRS"
                         }
                     },
                     "dataDisks": [
@@ -402,7 +402,7 @@
                             "createOption": "Empty",
                             "diskSizeGB": 20,
                             "managedDisk": {
-                                "storageAccountType": "StandardHDD_LRS"
+                                "storageAccountType": "Standard_LRS"
                             },
                             "lun": 0
                         }
@@ -731,7 +731,7 @@
                 "logActivityTrace": 0,
                 "description": "Certificate Lifecycle Management",
                  "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/certlc/main/.runbook/runbook_v3.ps1",
+                    "uri": "https://raw.githubusercontent.com/elitemn/certlc/main/.runbook/runbook_v3.ps1",
                     "version": "2.1.0.0"
                 }
             }
@@ -1341,7 +1341,7 @@
                 "logActivityTrace": 0,
                 "description": "Certificate Lifecycle Dashboard Data Ingestion",
                     "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/certlc/main/.runbook/dashboard_fe_v1.ps1",
+                    "uri": "https://raw.githubusercontent.com/elitemn/certlc/main/.runbook/dashboard_fe_v1.ps1",
                     "version": "2.1.0.0"
                 }
             }
