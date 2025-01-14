@@ -344,11 +344,12 @@
                         "name": "ipconfig1",
                         "properties": {
                             "privateIPAllocationMethod": "Static",
+			    "publicIPAddress": null,
                             "privateIPAddress": "[parameters('DCprivateIPAddress')]",
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]"
                             },
-                            "publicIPAddress": null
+                        }
                     }
                 ]
             }
