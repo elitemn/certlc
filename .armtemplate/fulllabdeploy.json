@@ -284,12 +284,23 @@
     "variables": {
         "UniqueStringBasedOnTimeStamp": "[uniqueString(deployment().name, parameters('_CurrentDateTimeInTicks'))]",
         "DCnicName": "[concat(parameters('DCvmName'),'-nic')]",
+        "DCpublicIPAddressName": "[concat(parameters('DCvmName'),'-ip')]",
         "CAnicName": "[concat(parameters('CAvmName'),'-nic')]",
         "Location": "[resourceGroup().location]",
         "TableName": "[concat(parameters('TableName'),'_CL')]",
         "streamName": "[concat('Custom-',parameters('TableName'),'RawData')]"
     },
     "resources": [
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2024-05-01",
+            "name": "[variables('DCpublicIPAddressName')]",
+            "location": "[variables('location')]",
+            "properties": {
+                "publicIPAllocationMethod": "Static"
+                }
+        },
+
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2024-08-01",
@@ -337,7 +348,7 @@
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]"
                             },
-                        }
+                            "publicIPAddress": null
                     }
                 ]
             }
@@ -635,7 +646,7 @@
                 "softDeleteRetentionInDays": 7,
                 "enableRbacAuthorization": true,
                 "vaultUri": "[concat(concat('https://',parameters('KeyvaultName')),'.vault.azure.net/')]",
-                "publicNetworkAccess": "Disabled"
+                "publicNetworkAccess": "Enabled"
             }
         },
 
@@ -648,7 +659,7 @@
                 "type": "SystemAssigned"
             },
             "properties": {
-                "publicNetworkAccess": false,
+                "publicNetworkAccess": true,
                 "disableLocalAuth": false,
                 "sku": {
                     "name": "Basic"
@@ -907,7 +918,7 @@
             "properties": {
                 "dnsEndpointType": "Standard",
                 "defaultToOAuthAuthentication": false,
-                "publicNetworkAccess": "Disabled",
+                "publicNetworkAccess": "Enabled",
                 "allowCrossTenantReplication": false,
                 "minimumTlsVersion": "TLS1_2",
                 "allowBlobPublicAccess": false,
@@ -1154,7 +1165,7 @@
                 "location": "[variables('Location')]",
                 "properties": {
                     "networkAcls": {
-                        "publicNetworkAccess": "Disabled"
+                        "publicNetworkAccess": "Enabled"
                     }
                 }
         },
