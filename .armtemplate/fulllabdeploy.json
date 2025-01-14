@@ -629,6 +629,16 @@
                 },
                 "tenantId": "[subscription().tenantId]",
                 "accessPolicies": [],
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "defaultAction": "Deny",
+                    "virtualNetworkRules": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]"
+                        }
+                    ],
+                    "ipRules": []
+                     },
                 "enabledForDeployment": false,
                 "enabledForDiskEncryption": true,
                 "enabledForTemplateDeployment": false,
